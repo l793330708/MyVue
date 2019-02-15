@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>跑马灯</title>
+		<script src="../js/vue.min.js"></script>
+	</head>
+	<body>
+		<div id="div1">
+			<button title="move" @click="run">move</button>
+			<button title="stop" @click="stop">stop</button>
+			<p>{{msg}}</p>
+		</div>
+		<script>
+			var div1 = new Vue({
+				el:'#div1',
+				data:{
+					msg:'牛逼牛逼框架牛逼~~',
+					id:null
+				},
+				//=>箭头函数完全修复了this的指向，this总是指向词法作用域，也就是外层调用者obj：
+				methods:{
+					run(){
+						console.log(this.id);
+						if(this.id!=null)
+						{return false;}
+							this.id = setInterval(() =>{
+							var start = this.msg.substr(0,1);
+							var end = this.msg.substr(1);
+							this.msg = end.concat(start);
+						},500)
+						
+						
+						
+					},
+					stop(){
+						clearInterval(this.id);
+						this.id = null;
+					}
+				}
+				
+			})
+			
+		</script>
+	</body>
+</html>
