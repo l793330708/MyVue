@@ -21,10 +21,9 @@
 			</div>
 			<div class="bg-secondary my-2">
 				<p>遍历对象数组,通过Key绑定对象</p>
-			<p  v-for="item2 in arr2" :key="item2.id">
+			<p  v-for="item2 in arr3" :key="item2.id">
 				<input type="checkbox" />
 				id:{{item2.id}}--name:{{item2.name}}
-			<button @click="del(item2.id)">删除</button></p>
 				
 			</div>
 			<div class="bg-primary my-2">
@@ -53,44 +52,23 @@
 					{id:2,name:"巨牙海民"},
 					{id:3,name:"剑圣"},
 					{id:4,name:"小小"},
-					{id:5,name:"狼人"},
-					]
+					{id:5,name:"狼人"}
+					],
+					arr3:[{id:1,name:"斧王"},
+					{id:2,name:"巨牙海民"},
+					{id:3,name:"剑圣"},
+					{id:4,name:"小小"},
+					{id:5,name:"狼人"}]
 				},
 				methods:{
 					add(){
 						this.arr2.unshift({id:this.id,name:this.name});
 					},
-					del(e){
-						
-						// 使用filter函数 返回一个过滤后的数组ele遍历当前元素，idx下标， arr为当前元素的所属数组对象
-						this.arr2 = this.arr2.filter((ele,idx,arr)=>{
-							
-							if(ele.id != e){
-								return ele;
-							}
-						})
-						
-						//使用some查找，直到满足条件时return
-//						this.arr2.some((item,i)=>{
-//							if(item.id == e){
-//							this.arr2.splice(i,1);
-//							return true;
-//							}
-//							
-//						})
-// 使用findIndex返回查找的数据在数组中的index
-//						var index = this.arr2.findIndex((item)=>{
-//							if(item.id==e){
-//								return true;
-//							}
-//							
-//						})
-//						this.arr2.splice(index,1);
-				},
+					
 					search(){
-						this.arr2 = this.arr2.filter((ele,idx,arr)=>{
-							
-							if(!ele.name.indexOf(this.keywords)){
+						this.arr3 = this.arr2.filter((ele,idx,arr)=>{
+							//indexof方法没找到返回-1，否则返回找到的第一个索引
+							if(ele.name.indexOf(this.keywords)!=-1){
 								return ele;
 							}
 						})
