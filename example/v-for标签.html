@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>循环标签</title>
+		<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="../js/vue.min.js"></script>
+	</head>
+	<body>
+		<div class="container bg-primary text-center" id="container">
+			<div class="bg-secondary my-2"> 
+				<p>遍历普通数组</p>
+			<p :class="c1" v-for="item in arr">{{item}}</p>
+			</div>
+			<div class="bg-secondary my-2">
+				<p>遍历对象</p>
+			<p :class="c1" v-for="item1 in arr1">{{item1}}</p>
+			</div>
+			<div class="bg-secondary my-2">
+				<p>遍历对象数组,通过Key绑定对象</p>
+			<p  v-for="item2 in arr2" :key="item2.id">
+				<input type="checkbox" />
+				id:{{item2.id}}--name:{{item2.name}}</p>
+			</div>
+			<div class="bg-primary my-2">
+				<label>id:</label>
+				<input type="text" v-model="id"/>
+				<label>name:</label>
+				<input type="text"  v-model="name"/>
+				<button class="btn btn-lg" @click="add">追加元素</button>
+				
+			</div>
+		</div>
+		<script>
+			var container = new Vue({
+				el:'#container',
+				data:{
+					arr:[1,2,3,4,5,6],
+					c1:'text-light',
+					id:'',
+					name:'',
+					arr1:{id:11,name:'lei'},
+					arr2:[
+					{id:1,name:"斧王"},
+					{id:2,name:"巨牙海民"},
+					{id:3,name:"剑圣"},
+					{id:4,name:"小小"},
+					{id:5,name:"狼人"},
+					]
+				},
+				methods:{
+					add(){
+						this.arr2.unshift({id:this.id,name:this.name});
+					}
+				}
+				
+			})
+			
+		</script>
+	</body>
+</html>
