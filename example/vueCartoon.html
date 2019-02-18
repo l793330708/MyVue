@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="../js/vue.min.js"></script>
+		<link rel="stylesheet" href="../css/animate.css" />
+	</head>
+	<style>
+		.v-enter,.v-leave-to{
+			opacity: 0;
+			transform: translateX(150px);
+		}
+		.v-enter-active,.v-leave-active{
+			transition: all 2s ease;
+		}
+	</style>
+	<body>
+		<div class="container" id ="container">
+			<!-- 包裹需要动画的            -->
+		<transition>
+			<p v-show="flag">111</p>
+		</transition>
+			
+			<button class="btn bg-primary" @click="toggle" >toggle</button>
+			
+		</div>
+		<hr>
+		<div class="container" id ="container1">
+			<!--  使用外部CSS创建动画         -->
+		<transition enter-active-class="bounceIn" leave-active-class="zoomOut" :duration="500">
+			<p v-show="flag" class="animated">2</p>
+		</transition>
+			
+			<button class="btn bg-primary" @click="toggle" >toggle</button>
+			
+		</div>
+		
+		<script>
+			var container = new Vue({
+				el:'#container',
+				data:{
+					flag:false
+				},
+				methods:{
+					toggle(){
+						this.flag = !this.flag;
+					}
+				}
+				
+			})
+			var container1 = new Vue({
+				el:'#container1',
+				data:{
+					flag:false
+				},
+				methods:{
+					toggle(){
+						this.flag = !this.flag;
+					}
+				}
+				
+			})
+		</script>
+	</body>
+</html>
