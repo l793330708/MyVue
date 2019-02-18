@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>钩子函数</title>
+		<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="../js/vue.min.js"></script>
+	</head>
+	<body>
+		<div class="container" id ="container">
+			<input type="text" :style="x" v-model="msg" v-focus @keyup.enter="move" v-color="'red'"/>
+			
+			<button class="btn" @click="move"/>Move
+		</div>
+		
+		<script>
+			//自定义按键
+			//Vue.config.keyCodes.enter = 14
+			//钩子函数
+			Vue.directive('focus',{
+				inserted:function(el){
+					el.focus();
+				},
+				bind:function(el){
+					console.log(el);
+				},
+				updated:function(el){
+					console.log('update');
+				},
+				//第二个参数binding name,value,oldvalue,expression,arg
+				componentUpdated:function(el,binding){
+					console.log('componentChange');
+					console.log(binding.name);
+				}
+			})
+			var container = new Vue({
+				el:'#container',
+				data:{
+					x:{position:'absolute',top:'500px'},
+					msg:''
+				},
+				methods:{
+					move(){
+						var msg = this.x.top.toString().substring(0,this.x.top.toString().indexOf('p'));
+						this.x.top =parseInt(msg) + 100 + 'px';
+					}
+				},
+				directives:{
+					//默认不写是直接添加在bind和updated函数中
+					color(el,binding){
+						el.style.color = binding.value;
+					}
+				}
+				
+			})
+		</script>
+	</body>
+</html>
